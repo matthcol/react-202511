@@ -5,6 +5,7 @@
 Voici un récapitulatif de l'évolution de JavaScript/ECMAScript et TypeScript :
 
 ### JavaScript / ECMAScript
+Documentation MDN: https://developer.mozilla.org/
 
 **1995 - Naissance**
 - Brendan Eich crée JavaScript en 10 jours chez Netscape
@@ -39,6 +40,7 @@ Voici un récapitulatif de l'évolution de JavaScript/ECMAScript et TypeScript :
 - **ES2024** : groupBy, Promise.withResolvers
 
 ### TypeScript
+https://www.typescriptlang.org/
 
 **2012 - Lancement**
 - Microsoft développe TypeScript (Anders Hejlsberg)
@@ -61,6 +63,8 @@ Voici un récapitulatif de l'évolution de JavaScript/ECMAScript et TypeScript :
 - **TS 5.0** (2023) : Decorators, const type parameters
 
 ### React
+- Site actuel: https://react.dev/
+- Site legacy: https://legacy.reactjs.org/
 
 **2011 - Origines**
 - Jordan Walke crée FaxJS chez Facebook
