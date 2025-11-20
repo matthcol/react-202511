@@ -62,10 +62,6 @@ Voici un récapitulatif de l'évolution de JavaScript/ECMAScript et TypeScript :
 
 ### React
 
-Voici un récapitulatif de l'évolution de React :
-
-## React - Historique
-
 **2011 - Origines**
 - Jordan Walke crée FaxJS chez Facebook
 - Prototype interne pour le fil d'actualité
