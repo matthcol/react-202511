@@ -101,4 +101,4 @@ console.log()
 
 city_data.forEach(({name, zipcode: zipcode2 = "00000", population = -1}) => console.log(`${name} (${zipcode2}, ${population})`))
 
-// TODO: try Object.groupBy
+// TODO: try Object.groupBy, Object.fromEntries
