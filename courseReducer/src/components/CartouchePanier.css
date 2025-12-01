@@ -1,0 +1,55 @@
+/* Réduire la taille globale de la ligne */
+.ligneArticle {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 10px 12px; /* Réduit de 16px à 10px */
+  margin-bottom: 8px; /* Réduit de 12px à 8px */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ligneArticle-info {
+  flex: 1;
+}
+
+.ligneArticle-produit {
+  font-weight: 600;
+  font-size: 0.875rem; /* Réduit de 1rem à 0.875rem */
+  margin-bottom: 4px; /* Réduit de 6px à 4px */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ligneArticle-produit::before {
+  content: "📦";
+  font-size: 0.9rem; /* Réduit de 1.1rem à 0.9rem */
+}
+
+.ligneArticle-quantite {
+  font-size: 0.8rem; /* Réduit de 0.9rem à 0.8rem */
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ligneArticle-quantite::before {
+  content: "×";
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.ligneArticle-badge {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 4px 10px; /* Réduit de 6px 12px */
+  border-radius: 16px; /* Réduit de 20px */
+  font-size: 0.75rem; /* Réduit de 0.85rem */
+  font-weight: 600;
+  min-width: 35px; /* Réduit de 40px */
+  text-align: center;
+}

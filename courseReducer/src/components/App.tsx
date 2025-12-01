@@ -7,7 +7,6 @@ import { range } from '../utils';
 
 import CartouchePanier from './CartouchePanier';
 import { ContextCompteur } from '../main';
-import { usePanier } from '../contextes/ContextPanier';
 
 function App() {
   
@@ -36,6 +35,7 @@ function App() {
   const nbPage = Math.ceil(produitsData.length / nbProduitPage)
   const produitsDisplay = produitsData.slice(firstIndexProduit, lastIndexProduit)
   const pages = range(nbPage, 1)
+  
   console.log('Pages:', pages)
   console.log(`Display produits: page=${numPage} de ${firstIndexProduit} à ${lastIndexProduit}`)
 
@@ -73,9 +73,19 @@ function App() {
   // }
   
   return (
-    <>
-      <div>Compteur : {compteur}</div>
-      <CartouchePanier />
+     <div className="app-container">
+      {/* Header avec compteur */}
+      <div className="app-header">
+        <div>Compteur : {compteur}</div>
+      </div>
+
+      {/* Panier sticky */}
+      <div className="panier-section">
+        <CartouchePanier />
+      </div>
+    
+          {/* Contrôles de pagination et taille */}
+      <div className="controls-container">
       <div className='taillePage'>
           <select value={nbProduitPage} onChange={handleChangeNbProduitPage}>
              <option value="10">10</option>
@@ -94,6 +104,9 @@ function App() {
           ))
         }
       </div>
+      </div>
+
+        {/* Liste des produits */}
       <div className='listeProduit'>
           {produitsDisplay.map((produit, index) => (
             <VignetteProduit 
@@ -102,7 +115,7 @@ function App() {
             />)
           )}
       </div>
-    </>
+    </div>
   )
 }
 

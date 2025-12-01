@@ -2,6 +2,7 @@ import type { Produit } from "../types/produit"
 import produitsData from '../../data/produits.json';
 import type { FC } from "react";
 import { usePanier } from "../contextes/ContextPanier";
+import './CartouchePanier.css';
 
 type LigneArticleProps = {
     idProduit: number

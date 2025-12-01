@@ -1,4 +1,4 @@
-import { useContext, type FC } from "react";
+import { useContext, useState, type FC } from "react";
 import type { Produit } from "../types/produit";
 import './VignetteProduit.css'
 import { ContextCompteur } from "../main";
@@ -11,40 +11,64 @@ type VignetteProduitProps = {
 
 
 const VignetteProduit: FC<VignetteProduitProps> = ({produit}) => {
-    const {dispatch} = usePanier()
-    const compteur = useContext(ContextCompteur)
-    return (
-        <div>
-            <div>Compteur : {compteur}</div>
-            <div><img src={produit.PhotoListe} alt={produit.Libelle} /></div>
-            <button onClick={() => dispatch(
-                {
-                    type: 'ajouterProduit',
-                    idProduit: produit.Id,
-                    quantite: 1
-                })}
-            >+</button>
-            <div>{produit.Libelle}</div>
-            <div>{produit.Prix}€</div>
-            {
-                (produit.FiltresLabelsQualite.length > 0) && (
-                <div>
-                    {produit.FiltresLabelsQualite.map((qualite, i) => <div key={i} className="qualite">{qualite}</div>)}
-                </div>
-                )
+    const {dispatch} = usePanier();
+    const compteur = useContext(ContextCompteur);
+    const [isAdding, setIsAdding] = useState(false);
 
-                // nutriscore: afficher nutriscore ou label indiquant non connu
-            }
-            {
-                (produit.FiltresNutriscore.length > 0) ? ( 
-                    <div className="nutriscore">{produit.FiltresNutriscore[0]}</div>
-                ):(
-                    <div className="nonutriscore">nutriscore non disponible</div>
-                )  
-            }
+    const handleAjouterPanier = () => {
+        setIsAdding(true);
+        dispatch({
+            type: 'ajouterProduit',
+            idProduit: produit.Id,
+            quantite: 1
+        });
+        
+        setTimeout(() => setIsAdding(false), 400);
+    }
+
+    return (
+        <div className="vignetteProduit">
+            <div className="vignette-image">
+                <img src={produit.PhotoListe} alt={produit.Libelle} />
+                <button 
+                    className={`btn-ajouter ${isAdding ? 'adding' : ''}`}
+                    onClick={handleAjouterPanier}
+                    aria-label="Ajouter au panier"
+                >
+                    +
+                </button>
+            </div>
+            {/* Contenu */}
+            <div className="vignette-content">
+                <div className="vignette-libelle">{produit.Libelle}</div>
+                <div className="vignette-prix">{produit.Prix.toFixed(2)}</div>
+
+                {/* Labels qualité */}
+                {produit.FiltresLabelsQualite.length > 0 && (
+                    <div className="vignette-qualites">
+                        {produit.FiltresLabelsQualite.map((qualite, i) => (
+                            <div key={i} className="qualite">{qualite}</div>
+                        ))}
+                    </div>
+                )}
+
+                {/* Nutriscore */}
+                <div className="vignette-nutriscore">
+                    {produit.FiltresNutriscore.length > 0 ? (
+                        <div 
+                            className="nutriscore" 
+                            data-score={produit.FiltresNutriscore[0]}
+                        >
+                            {produit.FiltresNutriscore[0]}
+                        </div>
+                    ) : (
+                        <div className="nonutriscore">Nutriscore non disponible</div>
+                    )}
+                </div>
+            </div>
         </div>
-    )
-}
+    );
+};
 
 export default VignetteProduit;
 export {type VignetteProduitProps};

@@ -120,3 +120,17 @@ https://www.typescriptlang.org/
 ## Premier Projet React
 
 npm create vite@latest course -- --template react-ts
+
+## JSON Server
+```
+npm install json-server
+npx json-server --watch data.db.json --port 3001
+```
+
+Quelques routes:
+```
+http://localhost:3001/produitsData
+http://localhost:3001/produitsData?_page=1&_per_page=25
+http://localhost:3001/produitsData?Id=92
+```
+

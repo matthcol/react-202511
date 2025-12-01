@@ -1,5 +1,6 @@
 import { usePanier } from "../contextes/ContextPanier";
 import { LigneArticle } from "./LigneArticle";
+import './CartouchePanier.css';
 
 // type CartouchePanierProps = {
 //     panier: Panier,
