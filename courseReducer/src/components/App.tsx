@@ -1,16 +1,16 @@
 import { useContext, useReducer, useState, type ChangeEvent, type Reducer } from 'react';
-import produitsData from '../data/produits.json';
+import produitsData from '../../data/produits.json';
 
 import './App.css';
 import VignetteProduit from './VignetteProduit';
-import { range } from './utils';
+import { range } from '../utils';
 
 import CartouchePanier from './CartouchePanier';
-import { ContextCompteur } from './main';
-import { usePanier } from './contextes/ContextPanier';
+import { ContextCompteur } from '../main';
+import { usePanier } from '../contextes/ContextPanier';
 
 function App() {
-  const {panier, dispatch} = usePanier()
+  
   const [nbProduitPage, setNbProduitPage] = useState<number>(10)
   const [numPage, setNumPage] = useState<number>(1)
   
@@ -27,6 +27,8 @@ function App() {
   // }
   // const {panier, dispatch} = contextPanier
   
+  // Version avec custom hook
+  // const {panier, dispatch} = usePanier() // finalement plus utilisé ici, uniquement ds enfants
 
   // data recalculées à chaque re-rendering déclenché par un changement de state (nbProduitPage ou numPage)
   const firstIndexProduit = (numPage - 1) * nbProduitPage // included
@@ -55,25 +57,25 @@ function App() {
   // handlers modifiant 1 tableau:
   // tips: https://react.dev/learn/updating-arrays-in-state
   
-  const handleAddProduit = (idProduit: number, quantite: number) => {
-    dispatch({
-      type: 'ajouterProduit',
-      idProduit: idProduit,
-      quantite: quantite
-    })
-  }
+  // const handleAddProduit = (idProduit: number, quantite: number) => {
+  //   dispatch({
+  //     type: 'ajouterProduit',
+  //     idProduit: idProduit,
+  //     quantite: quantite
+  //   })
+  // }
 
-  const handleRemoveProduit = (idProduitToRemove: number) => {
-    dispatch({
-      type: 'supprimerProduit',
-      idProduit: idProduitToRemove
-    })
-  }
+  // const handleRemoveProduit = (idProduitToRemove: number) => {
+  //   dispatch({
+  //     type: 'supprimerProduit',
+  //     idProduit: idProduitToRemove
+  //   })
+  // }
   
   return (
     <>
       <div>Compteur : {compteur}</div>
-      <CartouchePanier panier={panier} handleRemoveProduit={handleRemoveProduit}/>
+      <CartouchePanier />
       <div className='taillePage'>
           <select value={nbProduitPage} onChange={handleChangeNbProduitPage}>
              <option value="10">10</option>
@@ -97,7 +99,6 @@ function App() {
             <VignetteProduit 
                 key={`vgntprod_${index}`} // ou index du parcours du map 
                 produit={produit}
-                handleAddProduit={handleAddProduit} 
             />)
           )}
       </div>

@@ -15,10 +15,16 @@ const panierReducer = (panier: Panier, action: ActionPanier) => {
             console.log('Supprimer ligne article du produit:', action.idProduit)
             return panier.filter(({idProduit}) => idProduit != action.idProduit)
         case 'modifierProduit': // idProduit + quantite
-            return panier.map(ligneArticle => 
-                ligneArticle.idProduit == action.idProduit ?
-                {...ligneArticle, quantite: action.quantite} :
-                ligneArticle
+            return panier
+            // .filter(
+            //     ligneArticle => (ligneArticle.idProduit != action.idProduit)
+            //                     || (ligneArticle.quantite > 1)
+            // )
+            .map(
+                ligneArticle => 
+                    ligneArticle.idProduit == action.idProduit ?
+                    {...ligneArticle, quantite: action.quantite} :
+                    ligneArticle
             )
     }
 }

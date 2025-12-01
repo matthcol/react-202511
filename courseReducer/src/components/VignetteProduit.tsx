@@ -1,20 +1,29 @@
 import { useContext, type FC } from "react";
-import type { Produit } from "./types/produit";
+import type { Produit } from "../types/produit";
 import './VignetteProduit.css'
-import { ContextCompteur } from "./main";
+import { ContextCompteur } from "../main";
+import { usePanier } from "../contextes/ContextPanier";
 
 type VignetteProduitProps = {
     produit: Produit,
-    handleAddProduit: (idProduit: number, quantite: number) => void
+    // handleAddProduit: (idProduit: number, quantite: number) => void
 }
 
-const VignetteProduit: FC<VignetteProduitProps> = ({produit, handleAddProduit}) => {
+
+const VignetteProduit: FC<VignetteProduitProps> = ({produit}) => {
+    const {dispatch} = usePanier()
     const compteur = useContext(ContextCompteur)
     return (
         <div>
             <div>Compteur : {compteur}</div>
             <div><img src={produit.PhotoListe} alt={produit.Libelle} /></div>
-            <button onClick={() => handleAddProduit(produit.Id, 1)}>+</button>
+            <button onClick={() => dispatch(
+                {
+                    type: 'ajouterProduit',
+                    idProduit: produit.Id,
+                    quantite: 1
+                })}
+            >+</button>
             <div>{produit.Libelle}</div>
             <div>{produit.Prix}€</div>
             {
