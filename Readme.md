@@ -117,4 +117,6 @@ https://www.typescriptlang.org/
 - **State management** : Redux, Zustand, Jotai, TanStack Query
 - **Styling** : Tailwind CSS, styled-components, CSS Modules
 
+## Premier Projet React
 
+npm create vite@latest course -- --template react-ts

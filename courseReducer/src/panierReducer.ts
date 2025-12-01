@@ -9,8 +9,10 @@ const panierReducer = (panier: Panier, action: ActionPanier) => {
     switch (action.type) {
         case 'ajouterProduit':  // idProduit + quantite
             const newLigneArticle: LigneArticle = {idProduit: action.idProduit, quantite: action.quantite}
+            console.log('Ajout ligne article:', newLigneArticle)
             return [...panier, newLigneArticle]
         case 'supprimerProduit': // idProduit
+            console.log('Supprimer ligne article du produit:', action.idProduit)
             return panier.filter(({idProduit}) => idProduit != action.idProduit)
         case 'modifierProduit': // idProduit + quantite
             return panier.map(ligneArticle => 

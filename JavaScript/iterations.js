@@ -101,4 +101,20 @@ console.log()
 
 city_data.forEach(({name, zipcode: zipcode2 = "00000", population = -1}) => console.log(`${name} (${zipcode2}, ${population})`))
 
+
+// copie d'un objet avec changement d'1 clé
+const city3 = {
+    ...city,
+    population: city.population + 100
+}
+console.log(city)
+console.log(city3)
+
 // TODO: try Object.groupBy, Object.fromEntries
+
+// reductions
+const numbers = [12, 23, 45]
+const total = numbers.reduce((accu, n) => accu + n, 0)
+console.log(total)
+// const totalObject = numbers.reduce((n, accu) => {total: accu.total + n}, {total : 0})
+// console.log(totalObject)
