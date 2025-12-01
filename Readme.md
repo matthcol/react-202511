@@ -134,3 +134,7 @@ http://localhost:3001/produitsData?_page=1&_per_page=25
 http://localhost:3001/produitsData?Id=92
 ```
 
+Côté appli on peut utiliser par exemple rxjs:
+```
+npm install rxjs
+```

@@ -1,5 +1,6 @@
-import { useContext, useReducer, useState, type ChangeEvent, type Reducer } from 'react';
-import produitsData from '../../data/produits.json';
+import { useContext, useEffect, useReducer, useState, type ChangeEvent, type Reducer } from 'react';
+
+import _produitsData from '../../data/produits.json';
 
 import './App.css';
 import VignetteProduit from './VignetteProduit';
@@ -7,9 +8,11 @@ import { range } from '../utils';
 
 import CartouchePanier from './CartouchePanier';
 import { ContextCompteur } from '../main';
+import type { Produit } from '../types/produit';
+import loadPageProduits from '../services/catalogueService';
 
 function App() {
-  
+  const [produitsData, setProduitsData] = useState<Produit[]>([])
   const [nbProduitPage, setNbProduitPage] = useState<number>(10)
   const [numPage, setNumPage] = useState<number>(1)
   
@@ -38,6 +41,25 @@ function App() {
   
   console.log('Pages:', pages)
   console.log(`Display produits: page=${numPage} de ${firstIndexProduit} à ${lastIndexProduit}`)
+
+  useEffect(() => {
+    console.log('Chargement des données 0')
+    loadPageProduits(numPage, nbProduitPage)
+      .forEach(
+          newProduitsData => setProduitsData(newProduitsData)
+      )
+  }, [nbProduitPage, numPage])
+
+  // useEffect(() => {
+  //   // phase 1 : fait qd le useEffect est joué
+  //   const intervalId = setInterval(() => {
+  //     console.log('Chargement des données Refresh')
+  //     setProduitsData(_produitsData.slice(0, 20))
+  //   }, 5000)
+
+    // phase 2 : fait avant de rejouer l'effet
+  //   return () => clearInterval(intervalId)
+  // }, [produitsData])
 
   const handleChangeNbProduitPage = (e: ChangeEvent<HTMLSelectElement>) => {
     const newNbProduitPage = Number(e.target.value)
