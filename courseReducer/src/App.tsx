@@ -1,18 +1,33 @@
-import { useReducer, useState, type ChangeEvent, type Reducer } from 'react';
+import { useContext, useReducer, useState, type ChangeEvent, type Reducer } from 'react';
 import produitsData from '../data/produits.json';
 
 import './App.css';
 import VignetteProduit from './VignetteProduit';
 import { range } from './utils';
-import type { Panier } from './types/panier';
+
 import CartouchePanier from './CartouchePanier';
-import { panierReducer, type ActionPanier } from './panierReducer';
+import { ContextCompteur } from './main';
+import { usePanier } from './contextes/ContextPanier';
 
 function App() {
+  const {panier, dispatch} = usePanier()
   const [nbProduitPage, setNbProduitPage] = useState<number>(10)
   const [numPage, setNumPage] = useState<number>(1)
-  const [panier, dispatch] = useReducer(panierReducer, [])
   
+  
+  const compteur = useContext(ContextCompteur)
+
+  // Version sans contexte:
+  // const [panier, dispatch] = useReducer(panierReducer, [])
+
+  // Version avec  contexte sans custom Hook (undefined possible)
+  // const contextPanier = useContext(ContextPanier)
+  // if (!contextPanier) {
+  //   throw new Error("Utilisation du panier sans mise en place du provider")
+  // }
+  // const {panier, dispatch} = contextPanier
+  
+
   // data recalculées à chaque re-rendering déclenché par un changement de state (nbProduitPage ou numPage)
   const firstIndexProduit = (numPage - 1) * nbProduitPage // included
   const lastIndexProduit = numPage  * nbProduitPage // excluded
@@ -57,6 +72,7 @@ function App() {
   
   return (
     <>
+      <div>Compteur : {compteur}</div>
       <CartouchePanier panier={panier} handleRemoveProduit={handleRemoveProduit}/>
       <div className='taillePage'>
           <select value={nbProduitPage} onChange={handleChangeNbProduitPage}>

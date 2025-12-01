@@ -1,4 +1,4 @@
-import type { LigneArticle, Panier } from "./types/panier";
+import type { LigneArticle, Panier } from "../types/panier";
 
 type ActionPanier = 
   | { type: 'ajouterProduit'; idProduit: number; quantite: number }

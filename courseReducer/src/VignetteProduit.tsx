@@ -1,6 +1,7 @@
-import type { FC } from "react";
+import { useContext, type FC } from "react";
 import type { Produit } from "./types/produit";
 import './VignetteProduit.css'
+import { ContextCompteur } from "./main";
 
 type VignetteProduitProps = {
     produit: Produit,
@@ -8,8 +9,10 @@ type VignetteProduitProps = {
 }
 
 const VignetteProduit: FC<VignetteProduitProps> = ({produit, handleAddProduit}) => {
+    const compteur = useContext(ContextCompteur)
     return (
         <div>
+            <div>Compteur : {compteur}</div>
             <div><img src={produit.PhotoListe} alt={produit.Libelle} /></div>
             <button onClick={() => handleAddProduit(produit.Id, 1)}>+</button>
             <div>{produit.Libelle}</div>
